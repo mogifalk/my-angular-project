@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Mes appareils</h2>
+      <p>mis à jour : {{lastUpdate | async | date : 'medium'}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <ul class="list-group">
+      <app-appareil *ngFor="let appareil of appareils; let i = index"
+                    [appareilName]="appareil.name"
+                    [appareilStatus]="appareil.status"
+                    [index] = "i"></app-appareil>
+    </ul>
+  </div>
+  <div class="row">
+    <button [ngClass]="{'btn' : true,
+                          'btn-success' : true,
+                          'my-btn' : true,
+                          'hidden' : isConnected}"
+            (click)="onConnect()">Connexion</button>
+
+    <button [ngClass]="{'btn' : true,
+                          'btn-warning' : true,
+                          'my-btn' : true,
+                          'hidden' : !isConnected}"
+            (click)="onDisconnect()">Déconnexion</button>
+
+    <button [ngClass]="{'btn' : true,
+                          'btn-success' : true,
+                          'my-btn' : true,
+                          'hidden' : !displaySwitchOnAll()}"
+            (click)="onSwitchOnAll()">Tout allumer</button>
+
+    <button [ngClass]="{'btn' : true,
+                          'btn-warning' : true,
+                          'my-btn' : true ,
+                          'hidden' : !displaySwitchOffAll()}"
+            (click)="onSwitchOffAll()">Tout éteindre</button>
+  </div>
+</div>
